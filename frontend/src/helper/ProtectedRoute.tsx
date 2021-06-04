@@ -1,7 +1,5 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-import IF, { ELSE, THEN } from './IF'
-import SWITCH, { CASE, DEFAULT } from './Switch'
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 interface Iprops {
   children: any,
@@ -14,23 +12,8 @@ const ProtectedRoute = (props: Iprops) => {
 
   return (
     <>
-      <SWITCH variable={isLoading}>
-        <CASE check={true}>
-          <div className={"flex flex-col items-center justify-center w-full h-screen text-6xl text-white bg-dark-300"}>
-            <h1>loading</h1>
-          </div>
-        </CASE>
-        <DEFAULT>
-          <IF variable={isLoggedIn} logic={"==="} check={true}>
-            <THEN>
-              {children}
-            </THEN>
-            <ELSE>
-              <Redirect to={'/'} />
-            </ELSE>
-          </IF>
-        </DEFAULT>
-      </SWITCH>
+      <h1>Authenticating</h1>
+      {(isLoggedIn) ? children : <Redirect to="/" />}
     </>
   )
 }

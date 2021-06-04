@@ -15,7 +15,7 @@ function App() {
       <Switch>
         <Route path="/" component={Connect} exact />
         <ProtectedRoute isLoading={(authState.status === 'loading') ? true : false} isLoggedIn={authState.isLoggedIn}>
-          <Route path="/user" component={UserHome} />
+          <Route path="/user" component={UserHome} exact />
         </ProtectedRoute>
       </Switch>
     </Router>
