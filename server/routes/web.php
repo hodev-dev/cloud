@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/sanctum/token', [AuthController::class,'issue_token']);
+// Route::post('/sanctum/token', [AuthController::class,'issue_token']);

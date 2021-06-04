@@ -30,16 +30,15 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
     "start": "craco start",
-    "build": "craco build && yarn app:build",
+    "build": "npm run build:style && craco build && npm run react:build",
     "test": "craco test",
     "react:start": "react-scripts start",
     "react:build": "react-scripts build",
     "react:test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "export INLINE_RUNTIME_CHUNK=false && concurrently -k \"BROWSER=none yarn start\" \"yarn:electron\"",
-    "electron": "export ELECTRON_IS_DEV=1 && wait-on tcp:3000 && electron .",
-    "app:build": "export ELECTRON_IS_DEV=0 && mkdir build/src && cp -r electron/. build/electron",
     "app:pack": "electron-builder build  --linux"
   },
   "eslintConfig": {
