@@ -12,7 +12,6 @@ const ProtectedRoute = (props: Iprops) => {
 
   return (
     <>
-      <h1>Authenticating</h1>
       {(isLoggedIn) ? children : <Redirect to="/" />}
     </>
   )

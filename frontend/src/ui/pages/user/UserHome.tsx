@@ -1,14 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logOut } from '../../../features/auth/authSlice';
+import ContentPanel from './components/ContentPanel';
+import MidPanel from './components/MidPanel';
+import SidePanel from './components/SidePanel';
 
 const UserHome = () => {
-  const dispatch = useDispatch();
-
   return (
-    <div>
-      User Home
-      <button className={"w-64 h-64 bg-blue-400"} onClick={() => dispatch(logOut())}>logout</button>
+    <div className={"flex flex-row w-full h-screen bg-white"}>
+      <SidePanel />
+      <MidPanel />
+      <ContentPanel />
     </div>
   )
 }

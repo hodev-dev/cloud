@@ -26,7 +26,7 @@ const Connect = () => {
     }
   }
 
-  const handleSumbmit = async () => {
+  const handleSubmit = async () => {
     const request = Axios.post('/api/sanctum/token',
       { email: form.email, password: form.password, device_name: 'test' },
     );
@@ -53,7 +53,7 @@ const Connect = () => {
           <input name={"password"} onChange={handleForm} className={"h-12 mt-4 text-center border outline-none"} type="text" placeholder={"password"} />
           <h1 className={"mt-4 font-mono text-gray-800"}>Server Config:</h1>
           <input value={httpState.server} name={"server"} onChange={handleForm} className={"h-12 mt-4 text-center border outline-none"} type="text" placeholder={"server"} />
-          <button onClick={handleSumbmit} className={"self-center w-4/12 h-10 mt-4 text-center text-white bg-green-600 shadow-sm outline-none"}>Login</button>
+          <button onClick={handleSubmit} className={"self-center w-4/12 h-10 mt-4 text-center text-white bg-green-600 shadow-sm outline-none"}>Login</button>
           <button onClick={() => history.push('user')} className={"self-center w-4/12 h-10 mt-4 text-center text-white bg-green-600 shadow-sm outline-none"}>Go To User</button>
         </div>
       </div>
