@@ -5,7 +5,7 @@ import SidePanel from './components/SidePanel';
 
 const UserHome = () => {
   return (
-    <div className={"flex flex-row w-full h-screen bg-white"}>
+    <div className={"flex flex-row w-full h-screen overflow-hidden bg-white"}>
       <SidePanel />
       <MidPanel />
       <ContentPanel />

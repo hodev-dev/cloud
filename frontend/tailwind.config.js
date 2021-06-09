@@ -15,7 +15,6 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
@@ -26,6 +25,13 @@ module.exports = {
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
+      cyan: colors.cyan,
+      blueGray: colors.blueGray,
+      amber: colors.amber,
+      rose: colors.rose,
+      teal: colors.teal,
+      coolGray: colors.coolGray,
+      warmGray: colors.warmGray
     },
     spacing: {
       px: '1px',
@@ -424,6 +430,8 @@ module.exports = {
       '5/6': '83.333333%',
       full: '100%',
       screen: '100vh',
+      halfscreen: '50vh',
+      mostscreen: '70vh',
     }),
     inset: (theme, { negative }) => ({
       auto: 'auto',
@@ -533,11 +541,13 @@ module.exports = {
     }),
     minHeight: {
       0: '0px',
+      16: '4rem',
       full: '100%',
       screen: '100vh',
     },
     minWidth: {
       0: '0px',
+      16: '4rem',
       full: '100%',
       min: 'min-content',
       max: 'max-content',
@@ -816,6 +826,9 @@ module.exports = {
     'disabled',
   ],
   variants: {
+    extend: {
+      overflow: ['hover', 'focus'],
+    },
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],
     alignItems: ['responsive'],
@@ -846,8 +859,8 @@ module.exports = {
     borderColor: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
     borderOpacity: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
     borderRadius: ['responsive'],
-    borderStyle: ['responsive'],
-    borderWidth: ['responsive'],
+    borderStyle: ['responsive', 'focus'],
+    borderWidth: ['responsive', 'hover', 'focus'],
     boxDecorationBreak: ['responsive'],
     boxShadow: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
     boxSizing: ['responsive'],
@@ -913,7 +926,7 @@ module.exports = {
     opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
     order: ['responsive'],
     outline: ['responsive', 'focus-within', 'focus'],
-    overflow: ['responsive'],
+    overflow: ['responsive', 'hover'],
     overscrollBehavior: ['responsive'],
     padding: ['responsive'],
     placeContent: ['responsive'],
@@ -959,5 +972,7 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }
