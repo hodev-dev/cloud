@@ -174,12 +174,12 @@ const MidPanel = () => {
           </Navbar>
         </div>
         <div className={"overflow-y-hidden hover:overflow-y-scroll"}>
-          <FlatNamedButton key={'pAll'} selected={(passwordFolderSelect === -4) ? true : false} onClick={() => handleSelectFolder(-4)} icon={FiMenu} name="All" border iconColor={"text-blue-500"} selectBorder={'border-blue-700'} selectBg={"bg-blue-50"} />
-          <FlatNamedButton key={'pRecent'} selected={(passwordFolderSelect === -3) ? true : false} onClick={() => handleSelectFolder(-3)} icon={FiClock} name="Recent" border iconColor={"text-purple-500"} selectBorder={'border-purple-700'} selectBg={"bg-purple-50"} />
-          <FlatNamedButton key={'pFavorite'} selected={(passwordFolderSelect === -2) ? true : false} onClick={() => handleSelectFolder(-2)} icon={FiStar} name="Favorite" border iconColor={"text-yellow-500"} selectBorder={'border-yellow-700'} selectBg={"bg-yellow-50"} />
-          <FlatNamedButton key={'pTrash'} selected={(passwordFolderSelect === -1) ? true : false} onClick={() => handleSelectFolder(-1)} icon={FiTrash2} name="Trash" border iconColor={"text-red-500"} selectBorder={'border-red-700'} selectBg={"bg-red-50"} />
-          <div className={"flex flex-row items-center p-4 text-gray-700"}>
-            <h1>Categories</h1>
+          <FlatNamedButton key={'pAll'} selected={(passwordFolderSelect === -4) ? true : false} onClick={() => handleSelectFolder(-4)} icon={FiMenu} name="All" border iconColor={"text-blue-500"} selectBorder={'bg-blue-700'} selectBg={"bg-blue-50"} />
+          <FlatNamedButton key={'pRecent'} selected={(passwordFolderSelect === -3) ? true : false} onClick={() => handleSelectFolder(-3)} icon={FiClock} name="Recent" border iconColor={"text-purple-500"} selectBorder={'bg-purple-700'} selectBg={"bg-purple-50"} />
+          <FlatNamedButton key={'pFavorite'} selected={(passwordFolderSelect === -2) ? true : false} onClick={() => handleSelectFolder(-2)} icon={FiStar} name="Favorite" border iconColor={"text-yellow-500"} selectBorder={'bg-yellow-700'} selectBg={"bg-yellow-50"} />
+          <FlatNamedButton key={'pTrash'} selected={(passwordFolderSelect === -1) ? true : false} onClick={() => handleSelectFolder(-1)} icon={FiTrash2} name="Trash" border iconColor={"text-red-500"} selectBorder={'bg-red-700'} selectBg={"bg-red-50"} />
+          <div className={"flex flex-row items-center h-16 text-gray-700 border border-t-0 border-r-0 bg-gray-50"}>
+            <h1 className={"m-4"}>Categories</h1>
           </div>
           {renderAddFolderState()}
           <div>
