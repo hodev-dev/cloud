@@ -31,7 +31,10 @@ module.exports = {
       rose: colors.rose,
       teal: colors.teal,
       coolGray: colors.coolGray,
-      warmGray: colors.warmGray
+      warmGray: colors.warmGray,
+      modern: {
+        lightBlue: "#007AFF"
+      },
     },
     spacing: {
       px: '1px',
@@ -431,7 +434,8 @@ module.exports = {
       full: '100%',
       screen: '100vh',
       halfscreen: '50vh',
-      mostscreen: '70vh',
+      mostscreen: '60vh',
+      12: '3rem',
     }),
     inset: (theme, { negative }) => ({
       auto: 'auto',
@@ -541,9 +545,11 @@ module.exports = {
     }),
     minHeight: {
       0: '0px',
+      12: '3rem',
       16: '4rem',
       full: '100%',
       screen: '100vh',
+      half: '50vh',
     },
     minWidth: {
       0: '0px',

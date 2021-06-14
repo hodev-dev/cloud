@@ -1,37 +1,45 @@
-import React, { useRef, useState } from 'react';
-import { useClickOutside } from '../../../helper/useClickOutside';
+import { Menu } from '@headlessui/react';
+import React, { Fragment } from 'react';
 import FlatButton from '../button/FlatButton';
 
 function Dropdown(props: any) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const clickRef = useRef<any>();
 
-  const handleCLose = () => {
-    setIsOpen(false)
-  }
-
-  const handleHover = () => {
-    setIsOpen(true);
-  }
-  useClickOutside(clickRef, handleCLose);
-
-  const renderDropdown = () => {
-    if (isOpen) {
+  const renderDropdown = (open: boolean) => {
+    return props.children.map((child: (open: boolean, active: boolean) => JSX.Element) => {
       return (
-        <div onMouseLeave={() => setIsOpen(false)} className={"absolute w-full h-auto bg-white shadow-xl top-16"}>
-          {props.children}
-        </div>
+        <Menu.Item>
+          {({ active }) => (
+            <Fragment>
+              {child(open, active)}
+            </Fragment>
+          )}
+        </Menu.Item>
       )
-    } else {
-      return null;
-    }
+    });
   }
+
   return (
     <>
-      <FlatButton onMouseOver={handleHover} icon={props.icon} />
-      {renderDropdown()}
+      <Menu>
+        {({ open }) => (
+          <Fragment>
+            <Menu.Button as={Fragment}>
+              <FlatButton icon={props.icon} />
+            </Menu.Button>
+            <div className={"absolute w-full bg-white shadow-2xl top-14"}>
+              <Menu.Items>
+                {renderDropdown(open)}
+              </Menu.Items>
+            </div>
+          </Fragment>
+        )}
+      </Menu>
     </>
   )
 }
 
 export default Dropdown
+function children(open: boolean, active: boolean): React.ReactElement<any, string | ((props: any) => React.ReactElement<any, any> | null) | (new (props: any) => React.Component<any, any, any>)> {
+  throw new Error('Function not implemented.');
+}
+
