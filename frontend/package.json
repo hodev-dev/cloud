@@ -34,7 +34,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
+    "build:style": "NODE_ENV=production tailwind build src/ui/assets/index.css -o src/ui/assets/tailwind.css",
     "start": "craco start",
     "build": "npm run build:style && craco build && npm run react:build",
     "test": "craco test",

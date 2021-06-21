@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import { store } from './app/store';
 import * as serviceWorker from './serviceWorker';
-import './styles/tailwind.css';
+import './ui/assets/tailwind.css';
 let persistor = persistStore(store);
 
 ReactDOM.render(

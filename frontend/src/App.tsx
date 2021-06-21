@@ -6,7 +6,7 @@ import {
 import { AuthState, selectAuth } from './features/auth/authSlice';
 import ProtectedRoute from './helper/ProtectedRoute';
 import Connect from "./ui/pages/Connect";
-import Passwords from "./ui/pages/user/Passwords";
+import Home from "./ui/pages/home/Home";
 
 function App() {
   const authState: AuthState = useSelector(selectAuth);
@@ -15,7 +15,7 @@ function App() {
       <Switch>
         <Route path="/" component={Connect} exact />
         <ProtectedRoute isLoading={(authState.status === 'loading') ? true : false} isLoggedIn={authState.isLoggedIn}>
-          <Route path="/user" component={Passwords} exact />
+          <Route path="/user" component={Home} exact />
         </ProtectedRoute>
       </Switch>
     </Router>

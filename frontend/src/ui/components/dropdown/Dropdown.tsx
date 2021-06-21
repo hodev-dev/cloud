@@ -5,9 +5,9 @@ import FlatButton from '../button/FlatButton';
 function Dropdown(props: any) {
 
   const renderDropdown = (open: boolean) => {
-    return props.children.map((child: (open: boolean, active: boolean) => JSX.Element) => {
+    return props.children.map((child: (open: boolean, active: boolean) => JSX.Element, index: number) => {
       return (
-        <Menu.Item>
+        <Menu.Item key={child.name}>
           {({ active }) => (
             <Fragment>
               {child(open, active)}
@@ -26,7 +26,7 @@ function Dropdown(props: any) {
             <Menu.Button as={Fragment}>
               <FlatButton icon={props.icon} />
             </Menu.Button>
-            <div className={"absolute w-full bg-white shadow-2xl top-14"}>
+            <div className={"absolute z-50 w-full bg-white shadow-2xl top-14"}>
               <Menu.Items>
                 {renderDropdown(open)}
               </Menu.Items>
@@ -39,7 +39,5 @@ function Dropdown(props: any) {
 }
 
 export default Dropdown
-function children(open: boolean, active: boolean): React.ReactElement<any, string | ((props: any) => React.ReactElement<any, any> | null) | (new (props: any) => React.Component<any, any, any>)> {
-  throw new Error('Function not implemented.');
-}
+
 

@@ -8,7 +8,7 @@ interface Iprops {
 }
 
 const ProtectedRoute = (props: Iprops) => {
-  const { isLoggedIn, isLoading, children } = props;
+  const { isLoggedIn, children } = props;
 
   return (
     <>
