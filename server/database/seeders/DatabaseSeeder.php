@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\TagSeeder;
 use Illuminate\Database\Seeder;
-use Database\Seeders\RoleSeeder;
-use Database\Seeders\PermissionSeeder;
+use Database\Seeders\GameSeeder;
+use Database\Seeders\GenreSeeder;
+use Database\Seeders\PlatformSeeder;
+use Database\Seeders\PageTrackerSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
         $this->call([
-            UserSeeder::class,
-            RoleSeeder::class,
-            PermissionSeeder::class,
+           GenreSeeder::class,
+           StoreSeeder::class,
+           PlatformSeeder::class,
+           PageTrackerSeeder::class,
+        //    GameSeeder::class,
+            //   PublisherSeeder::class,
+        //    TagSeeder::class
         ]);
     }
 }

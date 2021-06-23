@@ -1,9 +1,10 @@
 import { Action, combineReducers, configureStore, getDefaultMiddleware, ThunkAction } from '@reduxjs/toolkit';
-import { createTransform, FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
+import { createTransform, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authReducer from '../features/auth/authSlice';
 import counterReducer from '../features/counter/counterSlice';
 import httpReducer from '../features/http/httpSlice';
+import tabReducer from '../features/tabs/tabSlice';
 
 export const JSOGTransform = createTransform(
   (inboundState, key) => JSON.stringify(inboundState),
@@ -20,7 +21,8 @@ const persistConfig = {
 const reducers = combineReducers({
   counter: counterReducer,
   auth: authReducer,
-  http: httpReducer
+  http: httpReducer,
+  tabs: tabReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -29,9 +31,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== 'production',
   middleware: getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
+    serializableCheck: false,
   }),
 });
 

@@ -1,10 +1,9 @@
 import Img1 from '../../assets/img/img1.jpg';
 import Img2 from '../../assets/img/img2.jpg';
 import Img3 from '../../assets/img/img3.jpg';
-import Header from '../../partials/Header';
 
 
-const Passwords = () => {
+const Home = () => {
 
   const renderGames = () => {
     return (
@@ -39,10 +38,9 @@ const Passwords = () => {
 
   return (
     <div className={"relative flex flex-col w-full h-screen bg-white"}>
-      <Header />
       {renderGames()}
     </div>
   )
 }
 
-export default Passwords
+export default Home
