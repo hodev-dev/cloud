@@ -14,7 +14,6 @@ import Platform from './ui/pages/platform/Platform';
 import Publisher from './ui/pages/publisher/Publisher';
 import Store from './ui/pages/store/Store';
 import Tag from './ui/pages/tag/Tag';
-import Header from "./ui/partials/Header";
 
 
 function App() {
@@ -44,12 +43,10 @@ function App() {
 
   return (
     <Fragment>
-      <Header tabsState={_tabsState} />
       {transition((props, item) => (
         <animated.div style={props}>
           <Switch location={item}>
             <Route path="/" component={Connect} exact />
-            {/* <ProtectedRoute isLoading={(authState.status === 'loading') ? true : false} isLoggedIn={authState.isLoggedIn}></ProtectedRoute> */}
             <Route path="/home" component={Home} exact />
             <Route path="/platform" component={Platform} exact />
             <Route path="/store" component={Store} exact />

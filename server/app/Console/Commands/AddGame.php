@@ -56,9 +56,9 @@ class AddGame extends Command
     public function __construct()
     {
         parent::__construct();
-        $page_tracker = PageTracker::first();
-        $this->page = $page_tracker->page;
-        $this->index = $page_tracker->index;
+        // $page_tracker = PageTracker::first();
+        // $this->page = $page_tracker->page;
+        // $this->index = $page_tracker->index;
     }
 
     /**
