@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Database\Seeders\TagSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\GameSeeder;
+use Database\Seeders\UserSeeder;
 use Database\Seeders\GenreSeeder;
 use Database\Seeders\PlatformSeeder;
 use Database\Seeders\PageTrackerSeeder;
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            UserSeeder::class,
            GenreSeeder::class,
            StoreSeeder::class,
            PlatformSeeder::class,

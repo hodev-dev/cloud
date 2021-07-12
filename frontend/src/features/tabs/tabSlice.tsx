@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FaBookReader, FaFolder, FaGamepad, FaHashtag, FaHome, FaStarOfLife, FaStore } from 'react-icons/fa';
+import { FaBookReader, FaFolder, FaGamepad, FaHashtag, FaHome, FaStarOfLife, FaStore, FaYahoo } from 'react-icons/fa';
 
 export const tabs = [
   {
@@ -7,6 +7,13 @@ export const tabs = [
     name: "Home",
     route: '/home',
     icon: FaHome,
+    selected: true,
+  },
+  {
+    id: "News",
+    name: "News",
+    route: '/news',
+    icon: FaYahoo,
     selected: true,
   },
   {

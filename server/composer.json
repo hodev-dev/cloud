@@ -11,9 +11,11 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.5",
         "kornrunner/blurhash": "^1.2",
+        "ksubileau/color-thief-php": "^1.4",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.9",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "mexitek/phpcolors": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

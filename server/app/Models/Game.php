@@ -28,6 +28,7 @@ class Game extends Model
         'metacritic',
         'background_image',
         'background_image_hash',
+        'color',
         'metacritic_url',
         'tba',
         'game_series_count',

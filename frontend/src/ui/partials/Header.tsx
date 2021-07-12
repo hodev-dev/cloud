@@ -34,7 +34,7 @@ const Header = (props: any) => {
           <FlatButton icon={FiSettings} />
         </NavbarRightControl>
       </Navbar>
-      <div className={"flex flex-row w-full font-shabnam"}>
+      <div className={"flex flex-row w-full font-shabnam f"}>
         {renderTabs()}
       </div>
     </div >
