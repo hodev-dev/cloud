@@ -69,6 +69,18 @@ class AddGame extends Command
      * @return void
      */
 
+    public function generateColor($image_path)
+    {
+        $dominantColor = ColorThief::getPalette($image_path, 2, 2)[0];
+        $color = sprintf("#%02x%02x%02x", $dominantColor[0], $dominantColor[1], $dominantColor[2]);
+        $colorObject = new Color($color);
+        if ($colorObject->isLight()) {
+            $newColor = ColorThief::getPalette($image_path, 2, 2)[1];
+            return sprintf("#%02x%02x%02x", $newColor[0], $newColor[1], $newColor[2]);
+        }
+        return $color;
+    }
+
     public function add_stores($stores, $id)
     {
         foreach ($stores as $store) {
@@ -190,18 +202,16 @@ class AddGame extends Command
             $store_path = "public/games" . "/" . $game_info['slug'] . "/screenshots/" . $game_info['slug'] . $index . '.' . $extension;
             $access_path = "/storage/games/" . $game_info['slug'] . "/screenshots/" . $game_info['slug'] . $index . '.' . $extension;
             $new_image = Image::make($image);
-            $width = $new_image->width();
             echo "-optimzing screenshot image" . "\n";
             $optimized_image = (string) $new_image->resize(1920, 1080)->encode('jpg', 50);
             $save_screenshot = Storage::put($store_path, $optimized_image);
-            $save_screenshot = Storage::put($store_path, $optimized_image);
             echo "-screenshot image saved" . "\n";
-            $blur_hash =  BlurHashHelper::encode($optimized_image);
-            echo "-screenshot blur saved" . "\n";
+            $color = $this->generateColor("http://localhost:8000" . $access_path);
+            echo "-color image saved" . "\n";
             $save = Screenshot::firstOrCreate([
                 'game_id' => $id,
                 'image' => $access_path,
-                'image_hash' => $blur_hash,
+                'color' => $color,
                 'width' => $screenshot['width'],
                 'height' => $screenshot['height'],
             ]);
@@ -211,17 +221,7 @@ class AddGame extends Command
         }
     }
 
-    public function generateColor($image_path)
-    {
-        $dominantColor = ColorThief::getPalette($image_path, 2, 2)[0];
-        $color = sprintf("#%02x%02x%02x", $dominantColor[0], $dominantColor[1], $dominantColor[2]);
-        $colorObject = new Color($color);
-        if ($colorObject->isLight()) {
-            $newColor = ColorThief::getPalette($image_path, 2, 2)[1];
-            return sprintf("#%02x%02x%02x", $newColor[0], $newColor[1], $newColor[2]);
-        }
-        return $color;
-    }
+
 
     public function add_game($id)
     {
@@ -240,15 +240,12 @@ class AddGame extends Command
         echo "-background image saved" . "\n";
         $color = $this->generateColor("http://localhost:8000" . $access_path);
         echo "-color image saved" . "\n";
-        $blur_hash =  "#sdasdsad";
-        echo "-background image blur created" . "\n";
         $save_game = Game::firstOrCreate([
             'id' => $games_detail_response['id'],
             'name' => $games_detail_response['name'],
             'name_original' => $games_detail_response['name_original'],
             'slug' => $games_detail_response['slug'],
             'background_image' => $access_path,
-            'background_image_hash' => $blur_hash,
             'color' => $color,
             'description' => $games_detail_response['description_raw'],
             'website' => $games_detail_response['website'],
@@ -262,13 +259,13 @@ class AddGame extends Command
         ]);
         if ($save_game) {
             echo "-game data saved successfully" . "\n";
-            // $this->add_stores($games_detail_response['stores'], $games_detail_response['id']);
-            // $this->add_genres($games_detail_response['genres'], $games_detail_response['id']);
-            // $this->add_platforms($games_detail_response['platforms'], $games_detail_response['id']);
-            // $this->add_esrbs($games_detail_response['esrb_rating'], $games_detail_response['id']);
-            // $this->add_tags($games_detail_response['tags'], $games_detail_response['id']);
-            // $this->add_publisher($games_detail_response['publishers'], $games_detail_response['id']);
-            // $this->add_developer($games_detail_response['developers'], $games_detail_response['id']);
+            $this->add_stores($games_detail_response['stores'], $games_detail_response['id']);
+            $this->add_genres($games_detail_response['genres'], $games_detail_response['id']);
+            $this->add_platforms($games_detail_response['platforms'], $games_detail_response['id']);
+            $this->add_esrbs($games_detail_response['esrb_rating'], $games_detail_response['id']);
+            $this->add_tags($games_detail_response['tags'], $games_detail_response['id']);
+            $this->add_publisher($games_detail_response['publishers'], $games_detail_response['id']);
+            $this->add_developer($games_detail_response['developers'], $games_detail_response['id']);
             $blur_hash = null;
             $image = null;
             $save_screenshot = null;
@@ -299,7 +296,7 @@ class AddGame extends Command
             foreach ($games_results as $index => $game_result) {
                 if ($index >= $this->index) {
                     $this->add_game($game_result['id']);
-                    // $this->add_screenshots($game_result['id']);
+                    $this->add_screenshots($game_result['id']);
                     $this->index++;
                     PageTracker::where('id', 1)->update(['index' => $this->index]);
                 }

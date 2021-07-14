@@ -18,7 +18,7 @@ class CreateScreenshotsTable extends Migration
             $table->unsignedBigInteger('game_id');
             $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
             $table->string('image');
-            $table->string('image_hash');
+            $table->string('color');
             $table->integer('width');
             $table->integer('height');
             $table->timestamps();

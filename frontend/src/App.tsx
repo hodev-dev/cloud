@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import {
   Route, Switch
 } from "react-router-dom";
+import Category from './ui/pages/category/Category';
 // import { AuthState, selectAuth } from './features/auth/authSlice';
 import Collection from './ui/pages/collection/Collection';
 import Connect from "./ui/pages/Connect";
-import Genre from './ui/pages/genre/Genre';
-import Home from "./ui/pages/home/Home";
+import Game from "./ui/pages/game/Game";
 import News from "./ui/pages/news/News";
 import Platform from './ui/pages/platform/Platform';
 import Publisher from './ui/pages/publisher/Publisher';
@@ -24,13 +24,13 @@ function App() {
     <Fragment>
       <Switch>
         <Route path="/" component={Connect} exact />
-        <Route path="/home" component={Home} exact />
+        <Route path="/game" component={Game} exact />
         <Route path="/news" component={News} exact />
         <Route path="/platform" component={Platform} exact />
         <Route path="/store" component={Store} exact />
         <Route path="/collection" component={Collection} exact />
         <Route path="/tag" component={Tag} exact />
-        <Route path="/genre" component={Genre} exact />
+        <Route path="/category" component={Category} exact />
         <Route path="/publisher" component={Publisher} exact />
       </Switch>
     </Fragment>

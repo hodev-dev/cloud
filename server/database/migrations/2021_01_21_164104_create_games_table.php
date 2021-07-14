@@ -19,7 +19,6 @@ class CreateGamesTable extends Migration
             $table->string('name')->nullable();
             $table->string('name_original')->nullable();
             $table->text('background_image')->nullable();
-            $table->text('background_image_hash')->nullable();
             $table->string('color');
             $table->text('description')->nullable();
             $table->text('website')->nullable();

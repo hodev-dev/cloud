@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { FaChartBar, FaHashtag, FaHome } from 'react-icons/fa'
 import { FiBell, FiGrid, FiMenu, FiSettings } from 'react-icons/fi'
 import FlatButton from '../components/button/FlatButton'
 import FlatNamedButton from '../components/button/FlatNamedButton'
@@ -12,9 +13,9 @@ const Header = (props: any) => {
   const renderTabs = () => {
     return props.tabsState.map((tab: any) => {
       return (
-        <Fragment key={tab.name.toString()}>
-          <FlatNamedButton to={tab.route} shapeType={1} icon={tab.icon} name={tab.name} border selected={tab.selected} iconColor={"text-gray-600"} selectColor={'bg-rose-600'} selectBg={"bg-gray-100"} />
-        </Fragment>
+        <div className={"flex flex-wrap w-1/6 h-auto bg-blue-500"} key={tab.name.toString()}>
+          <FlatNamedButton to={tab.route} shapeType={1} icon={tab.icon} name={tab.name} border selected={tab.selected} iconColor={"text-gray-600"} selectColor={'bg-rose-500'} selectBg={"bg-gray-100"} />
+        </div>
       );
     });
   }
@@ -23,6 +24,7 @@ const Header = (props: any) => {
     <div className={"relative flex flex-col w-full h-auto bg-white md:w-full"} dir={"rtl"}>
       <Navbar desktop>
         <NavbarLeftControl>
+          <FlatButton icon={FaHome} />
           <FlatButton icon={FiGrid} />
           <FlatButton icon={FiMenu} />
         </NavbarLeftControl>
@@ -30,11 +32,13 @@ const Header = (props: any) => {
           <input className={"flex items-center justify-center w-11/12 h-10 text-center text-gray-700 bg-white border border-gray-300 rounded-md "} placeholder="Search /passwords" />
         </NavbarCenterControl>
         <NavbarRightControl desktop>
+          <FlatButton icon={FaChartBar} />
+          <FlatButton icon={FaHashtag} />
           <FlatButton icon={FiBell} />
           <FlatButton icon={FiSettings} />
         </NavbarRightControl>
       </Navbar>
-      <div className={"flex flex-row w-full font-shabnam f"}>
+      <div className={"flex flex-row flex-wrap w-full font-shabnam"}>
         {renderTabs()}
       </div>
     </div >

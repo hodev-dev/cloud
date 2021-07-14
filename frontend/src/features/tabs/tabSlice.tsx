@@ -1,61 +1,47 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FaBookReader, FaFolder, FaGamepad, FaHashtag, FaHome, FaStarOfLife, FaStore, FaYahoo } from 'react-icons/fa';
+import { FaFolder, FaHashtag, FaHotjar, FaNewspaper, FaStarOfLife, FaStore } from 'react-icons/fa';
 
 export const tabs = [
   {
-    id: "Home",
-    name: "Home",
-    route: '/home',
-    icon: FaHome,
+    id: "Game",
+    name: "داغ ترین ها",
+    route: '/game',
+    icon: FaHotjar,
     selected: true,
   },
   {
     id: "News",
-    name: "News",
+    name: "اخبار",
     route: '/news',
-    icon: FaYahoo,
+    icon: FaNewspaper,
     selected: true,
-  },
-  {
-    id: "Platform",
-    route: '/platform',
-    name: "Platform",
-    icon: FaGamepad,
-    selected: false,
   },
   {
     id: "Store",
     route: '/store',
-    name: "Store",
+    name: "قروشگاه ها",
     icon: FaStore,
+    selected: false,
+  },
+  {
+    id: "Category",
+    route: '/category',
+    name: "دسته بندی ها",
+    icon: FaStarOfLife,
+    selected: false,
+  },
+  {
+    id: "Tag",
+    route: '/Tag',
+    name: "تگ ها",
+    icon: FaHashtag,
     selected: false,
   },
   {
     id: "Collection",
     route: '/collection',
-    name: "Collection",
+    name: "کالکشن ها",
     icon: FaFolder,
-    selected: false,
-  },
-  {
-    id: "Tag",
-    route: '/tag',
-    name: "Tag",
-    icon: FaHashtag,
-    selected: false,
-  },
-  {
-    id: "Genre",
-    route: '/genre',
-    name: "Genre",
-    icon: FaStarOfLife,
-    selected: false,
-  },
-  {
-    id: "Publisher",
-    route: '/publisher',
-    name: "Publisher",
-    icon: FaBookReader,
     selected: false,
   },
 ];
@@ -76,8 +62,8 @@ export const tabsSlice = createSlice({
   }
 });
 
-export const findIdByName = (states: any, name: any) => {
-  return states.find((state: any) => state.name === name);
+export const findIdByName = (states: any, id: any) => {
+  return states.find((state: any) => state.id === id);
 }
 
 export const { select } = tabsSlice.actions;

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
+use App\Models\Platform;
 use Illuminate\Http\Request;
 
-class GameController extends Controller
+class PlatformConroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        return Game::paginate(18);
+        return Platform::all();
     }
 
     /**

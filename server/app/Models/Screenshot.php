@@ -11,6 +11,7 @@ class Screenshot extends Model
     protected $fillable = [
         'game_id',
         'image',
+        'color',
         'image_hash',
         'width',
         'height',
