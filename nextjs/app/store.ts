@@ -1,9 +1,9 @@
+import authReducer from '@redux/auth/authSlice';
+import httpReducer from '@redux/http/httpSlice';
+import tabReducer from '@redux/tabs/tabSlice';
 import { Action, combineReducers, configureStore, getDefaultMiddleware, ThunkAction } from '@reduxjs/toolkit';
 import { createTransform, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import authReducer from '../features/auth/authSlice';
-import httpReducer from '../features/http/httpSlice';
-import tabReducer from '../features/tabs/tabSlice';
 
 export const JSOGTransform = createTransform(
   (inboundState, key) => JSON.stringify(inboundState),
