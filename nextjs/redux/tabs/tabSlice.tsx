@@ -32,7 +32,7 @@ export const tabs = [
   },
   {
     id: "Tag",
-    route: '/Tag',
+    route: '/tag',
     name: "تگ ها",
     icon: FaHashtag,
     selected: false,

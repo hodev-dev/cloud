@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Platform;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,13 @@ class PlatformConroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $queryArray = explode(',', $request['group']);
+        error_log($queryArray[0]);
+        return Game::whereHas('platforms', function ($q) use ($queryArray) {
+            $q->whereIn('slug', $queryArray);
+        })->paginate(30);
     }
 
     /**

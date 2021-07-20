@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FaAndroid, FaApple, FaAppStore, FaGooglePlay, FaLinux, FaPlaystation, FaSteam, FaWindows, FaXbox } from 'react-icons/fa';
 import { SiEpicgames } from 'react-icons/si';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RotateSpinner } from 'react-spinners-kit';
 import { findIdByName, select, tabs, tabsSelector } from '../../../features/tabs/tabSlice';
 import makeAxios from '../../../helper/makeAxios';
@@ -73,65 +74,68 @@ const Category = () => {
       <Header tabsState={_tabsState} />
       <NamedDivider name={"پلتفرم ها"} />
       <div className={"flex flex-row flex-wrap w-full h-auto bg-white"}>
-        <div className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
+        <Link to={"/platform/IOS?group=ios"} className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
           <div className={"flex items-center justify-center w-full h-16 border border-t-0 border-r-0"}>
             <div className={"flex items-center justify-center mr-5 "}>
               <FaApple size={32} className={"text-gray-800 fill-current"} />
             </div>
             <h1 className={"flex items-center justify-center h-16 text-xl font-medium text-gray-500 "}>{'IOS'}</h1>
           </div>
-        </div>
-        <div className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
+        </Link>
+        <Link to={"/platform/Android?group=android"} className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
           <div className={"flex items-center justify-center w-full h-16 border border-t-0 border-r-0"}>
             <div className={"flex items-center justify-center mr-5 "}>
               <FaAndroid size={32} className={"text-teal-500 fill-current"} />
             </div>
             <h1 className={"flex items-center justify-center h-16 text-xl font-medium text-gray-500 "}>{'Android'}</h1>
           </div>
-        </div>
-        <div className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
+        </Link>
+        <Link
+          to={"/platform/PlayStation?group=playstation5,playstation4,playstation3,playstation2,playstation1"}
+          className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}
+        >
           <div className={"flex items-center justify-center w-full h-16 border border-t-0 border-r-0"}>
             <div className={"flex items-center justify-center mr-5 "}>
               <FaPlaystation size={32} className={"text-blue-700 fill-current"} />
             </div>
             <h1 className={"flex items-center justify-center h-16 text-xl font-medium text-gray-500 "}>{'PlayStation'}</h1>
           </div>
-        </div>
-        <div className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
+        </Link>
+        <Link to={"/platform/Xbox?group=xbox-one,xbox-series-x,xbox360,xbox-old"} className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
           <div className={"flex items-center justify-center w-full h-16 border border-t-0 border-r-0"}>
             <div className={"flex items-center justify-center mr-5 "}>
               <FaXbox size={32} className={"text-green-700 fill-current"} />
             </div>
             <h1 className={"flex items-center justify-center h-16 text-xl font-medium text-gray-500 "}>{'Xbox'}</h1>
           </div>
-        </div>
-        <div className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
+        </Link>
+        <Link to={"/platform/PC?group=pc"} className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
           <div className={"flex items-center justify-center w-full h-16 border border-t-0 border-r-0"}>
             <div className={"flex items-center justify-center mr-5 "}>
               <FaWindows size={32} className={"text-blue-500 fill-current"} />
             </div>
             <h1 className={"flex items-center justify-center h-16 text-xl font-medium text-gray-500 "}>{'PC'}</h1>
           </div>
-        </div>
-        <div className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
+        </Link>
+        <Link to={"/platform/Linux?group=linux"} className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
           <div className={"flex items-center justify-center w-full h-16 border border-t-0 border-r-0"}>
             <div className={"flex items-center justify-center mr-5 "}>
               <FaLinux size={32} className={"fill-current text-amber-800"} />
             </div>
             <h1 className={"flex items-center justify-center h-16 text-xl font-medium text-gray-500 "}>{'Linux'}</h1>
           </div>
-        </div>
+        </Link>
       </div>
       <NamedDivider name={"فروشگاه ها"} />
       <div className={"flex flex-row flex-wrap w-full h-auto bg-white"}>
-        <div className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
+        <Link to={"/store/1/"} className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
           <div className={"flex items-center justify-center w-full h-16 border border-t-0 border-r-0"}>
             <div className={"flex items-center justify-center mr-5 "}>
               <FaAppStore size={32} className={"text-gray-800 fill-current"} />
             </div>
             <h1 className={"flex items-center justify-center h-16 text-xl font-medium text-gray-500 "}>{'App Store'}</h1>
           </div>
-        </div>
+        </Link>
         <div className={"flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100"}>
           <div className={"flex items-center justify-center w-full h-16 border border-t-0 border-r-0"}>
             <div className={"flex items-center justify-center mr-5 "}>
