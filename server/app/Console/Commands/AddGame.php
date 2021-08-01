@@ -235,7 +235,7 @@ class AddGame extends Command
         $access_path = "/storage/games/" . $games_detail_response['slug'] . "/background_image/" . $games_detail_response['slug'] . '.' . $extension;
         $new_image = Image::make($image);
         echo "-optimzing image" . "\n";
-        $optimized_image = (string) $new_image->resize(1920, 1080)->encode('jpg', 50);
+        $optimized_image = (string) $new_image->fit(640, 480)->sharpen(5)->encode('jpg', 60);
         Storage::put($store_path, $optimized_image);
         echo "-background image saved" . "\n";
         $color = $this->generateColor("http://localhost:8000" . $access_path);
@@ -296,7 +296,7 @@ class AddGame extends Command
             foreach ($games_results as $index => $game_result) {
                 if ($index >= $this->index) {
                     $this->add_game($game_result['id']);
-                    $this->add_screenshots($game_result['id']);
+                    // $this->add_screenshots($game_result['id']);
                     $this->index++;
                     PageTracker::where('id', 1)->update(['index' => $this->index]);
                 }

@@ -1,10 +1,23 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  purge: [],
-  presets: [],
+  purge: [
+      './components/**/*.{js,ts,jsx,tsx}',
+      './pages/**/*.{js,ts,jsx,tsx}'
+  ],
+  // presets: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    extend: {
+      fontFamily: {
+        'shabnam': [
+          "Shabnam"
+        ],
+        "sahel": [
+          "Sahel"
+        ]
+      }
+    },
     screens: {
       sm: '640px',
       md: '768px',
@@ -15,7 +28,6 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
@@ -26,6 +38,16 @@ module.exports = {
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
+      cyan: colors.cyan,
+      blueGray: colors.blueGray,
+      amber: colors.amber,
+      rose: colors.rose,
+      teal: colors.teal,
+      coolGray: colors.coolGray,
+      warmGray: colors.warmGray,
+      modern: {
+        lightBlue: "#007AFF"
+      },
     },
     spacing: {
       px: '1px',
@@ -111,7 +133,6 @@ module.exports = {
     },
     blur: {
       0: '0',
-      none: '0',
       sm: '4px',
       DEFAULT: '8px',
       md: '12px',
@@ -166,7 +187,6 @@ module.exports = {
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       none: 'none',
     },
-    caretColor: (theme) => theme('colors'),
     contrast: {
       0: '0',
       50: '.5',
@@ -177,9 +197,6 @@ module.exports = {
       200: '2',
     },
     container: {},
-    content: {
-      none: 'none',
-    },
     cursor: {
       auto: 'auto',
       default: 'default',
@@ -429,6 +446,9 @@ module.exports = {
       '5/6': '83.333333%',
       full: '100%',
       screen: '100vh',
+      halfscreen: '50vh',
+      mostscreen: '60vh',
+      12: '3rem',
     }),
     inset: (theme, { negative }) => ({
       auto: 'auto',
@@ -538,11 +558,47 @@ module.exports = {
     }),
     minHeight: {
       0: '0px',
+      0: '0px',
+      0.5: '0.125rem',
+      1: '0.25rem',
+      1.5: '0.375rem',
+      2: '0.5rem',
+      2.5: '0.625rem',
+      3: '0.75rem',
+      3.5: '0.875rem',
+      4: '1rem',
+      5: '1.25rem',
+      6: '1.5rem',
+      7: '1.75rem',
+      8: '2rem',
+      9: '2.25rem',
+      10: '2.5rem',
+      11: '2.75rem',
+      12: '3rem',
+      14: '3.5rem',
+      16: '4rem',
+      20: '5rem',
+      24: '6rem',
+      28: '7rem',
+      32: '8rem',
+      36: '9rem',
+      40: '10rem',
+      44: '11rem',
+      48: '12rem',
+      52: '13rem',
+      56: '14rem',
+      60: '15rem',
+      64: '16rem',
+      72: '18rem',
+      80: '20rem',
+      96: '24rem',
       full: '100%',
       screen: '100vh',
+      half: '50vh',
     },
     minWidth: {
       0: '0px',
+      16: '4rem',
       full: '100%',
       min: 'min-content',
       max: 'max-content',
@@ -811,8 +867,6 @@ module.exports = {
     'even',
     'visited',
     'checked',
-    'empty',
-    'read-only',
     'group-hover',
     'group-focus',
     'focus-within',
@@ -823,6 +877,9 @@ module.exports = {
     'disabled',
   ],
   variants: {
+    extend: {
+      overflow: ['hover', 'focus'],
+    },
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],
     alignItems: ['responsive'],
@@ -842,20 +899,19 @@ module.exports = {
     backgroundAttachment: ['responsive'],
     backgroundBlendMode: ['responsive'],
     backgroundClip: ['responsive'],
-    backgroundColor: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
+    backgroundColor: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled'],
     backgroundImage: ['responsive'],
     backgroundOpacity: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
     backgroundPosition: ['responsive'],
     backgroundRepeat: ['responsive'],
     backgroundSize: ['responsive'],
-    backgroundOrigin: ['responsive'],
     blur: ['responsive'],
     borderCollapse: ['responsive'],
     borderColor: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
     borderOpacity: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
     borderRadius: ['responsive'],
-    borderStyle: ['responsive'],
-    borderWidth: ['responsive'],
+    borderStyle: ['responsive', 'focus'],
+    borderWidth: ['responsive', 'hover', 'focus'],
     boxDecorationBreak: ['responsive'],
     boxShadow: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
     boxSizing: ['responsive'],
@@ -921,7 +977,7 @@ module.exports = {
     opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
     order: ['responsive'],
     outline: ['responsive', 'focus-within', 'focus'],
-    overflow: ['responsive'],
+    overflow: ['responsive', 'hover'],
     overscrollBehavior: ['responsive'],
     padding: ['responsive'],
     placeContent: ['responsive'],
@@ -966,6 +1022,5 @@ module.exports = {
     width: ['responsive'],
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
-  },
-  plugins: [],
+  }
 }

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Game;
-use App\Models\Genre;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class TagController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +15,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        return Genre::all();
+        return Tag::paginate(48);
     }
 
     /**
@@ -48,7 +47,7 @@ class GenreController extends Controller
      */
     public function show($slug)
     {
-        return Game::whereHas('genres', function ($q) use ($slug) {
+        return Game::whereHas('tags', function ($q) use ($slug) {
             $q->where('slug', $slug);
         })->paginate(18);
     }
