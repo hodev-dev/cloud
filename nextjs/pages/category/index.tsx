@@ -1,4 +1,4 @@
-import Header from '@components/Header';
+import TabNav from '@components/TabNav';
 import makeAxios from '@helper/makeAxios';
 import { findIdByName, select, tabs, tabsSelector } from '@redux/tabs/tabSlice';
 import { AxiosError, AxiosResponse } from 'axios';
@@ -78,7 +78,7 @@ const CategoryPage = () => {
 
    return (
       <>
-         <Header tabsState={_tabsState} />
+         <TabNav tabsState={_tabsState} />
          <NamedDivider name={'پلتفرم ها'} />
          <div className={'flex flex-row flex-wrap w-full h-auto bg-white'}>
             <div className={'flex flex-row flex-wrap w-1/6 bg-white cursor-pointer hover:bg-gray-100'}>

@@ -44,9 +44,9 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        return Game::where('slug', $slug)->with(['platforms', 'genres', 'stores', 'developers', 'publishers', 'esrbs'])->first();
     }
 
     /**
@@ -55,9 +55,8 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
     }
 
     /**

@@ -15,7 +15,7 @@ use App\Http\Controllers\StoreController;
 Route::post('/sanctum/token', [AuthController::class, 'issue_token']);
 
 // games
-Route::get('/games', [GameController::class, 'index']);
+Route::resource('/games', GameController::class);
 
 // tags
 Route::resource('/tags', TagController::class);

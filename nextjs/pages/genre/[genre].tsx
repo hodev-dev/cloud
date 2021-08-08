@@ -1,5 +1,5 @@
-import Header from '@components/Header';
 import NamedDivider from '@components/spacers/NamedDivider';
+import TabNav from '@components/TabNav';
 import makeAxios from '@helper/makeAxios';
 import { findIdByName, select, tabs, tabsSelector } from '@redux/tabs/tabSlice';
 import { AxiosError, AxiosResponse } from 'axios';
@@ -114,7 +114,7 @@ const GenrePage = ({ genre }) => {
 
    return (
       <>
-         <Header tabsState={_tabsState} />
+         <TabNav tabsState={_tabsState} />
          <NamedDivider name={'ژانر:' + ' ' + genre} size={'text-lg font-medium'} dir={'rtl'} />
          <div className={'flex flex-col flex-wrap w-full h-auto bg-white'}>
             <div className={'flex flex-wrap w-full'}>{renderGames()}</div>

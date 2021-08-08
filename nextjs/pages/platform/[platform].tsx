@@ -1,6 +1,6 @@
 import FlatNameSelect from '@components/button/FlatNamedSelect';
-import Header from '@components/Header';
 import NamedDivider from '@components/spacers/NamedDivider';
+import TabNav from '@components/TabNav';
 import makeAxios from '@helper/makeAxios';
 import { findIdByName, select, tabs, tabsSelector } from '@redux/tabs/tabSlice';
 import { AxiosError, AxiosResponse } from 'axios';
@@ -168,7 +168,7 @@ const PlatformPage = (props: any) => {
 
    return (
       <>
-         <Header tabsState={_tabsState} />
+         <TabNav tabsState={_tabsState} />
          <NamedDivider name={'پلتفرم:' + ' ' + platform} size={'text-lg font-medium'} dir={'rtl'} />
          <div className={'flex flex-col flex-wrap w-full h-auto bg-white'}>
             <div className={'flex flex-row w-full'}>{renderPlatformTypes()}</div>

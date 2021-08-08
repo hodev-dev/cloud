@@ -3,13 +3,17 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: Sahel;
-    src: url('./font/sahel/Sahel.ttf');
-    font-weight: normal;
+   font-family: Sahel;
+   src: url('./font/sahel/Sahel.ttf');
+   font-weight: normal;
 }
 
 @font-face {
-    font-family: Shabnam;
-    src: url('./font/shabnam/Shabnam.woff2');
-    font-weight: normal;
+   font-family: Shabnam;
+   src: url('./font/shabnam/Shabnam.woff2');
+   font-weight: normal;
+}
+
+.prevent-touch {
+   touch-action: none;
 }

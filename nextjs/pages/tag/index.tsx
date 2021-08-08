@@ -1,4 +1,4 @@
-import Header from '@components/Header';
+import TabNav from '@components/TabNav';
 import makeAxios from '@helper/makeAxios';
 import { findIdByName, select, tabs, tabsSelector } from '@redux/tabs/tabSlice';
 import { AxiosError, AxiosResponse } from 'axios';
@@ -93,7 +93,7 @@ const TagPage = () => {
 
    return (
       <>
-         <Header tabsState={_tabsState} />
+         <TabNav tabsState={_tabsState} />
          <div className={'flex flex-row flex-wrap w-full h-auto bg-white'}>
             {renderTags()}
             {renderStatus()}
