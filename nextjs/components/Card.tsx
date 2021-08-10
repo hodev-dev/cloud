@@ -1,4 +1,4 @@
-import { animated, useSpring } from '@react-spring/web';
+import { animated, config, useSpring } from '@react-spring/web';
 import React, { MutableRefObject, useRef } from 'react';
 import { FaBan } from 'react-icons/fa';
 import { FiHeart, FiMessageCircle } from 'react-icons/fi';
@@ -6,15 +6,15 @@ import { useDrag } from 'react-use-gesture';
 
 const Card = ({ image, color }) => {
    const bodyRef = useRef(null) as MutableRefObject<HTMLDivElement>;
-   const [{ topY, topDisplay }, setTop] = useSpring(() => ({ topY: 20000, opacityTop: 0, topDisplay: 'flex' }));
-   const [{ bottomY, bottomDisplay }, setBottom] = useSpring(() => ({ bottomY: 0, opacityBottom: 1, bottomDisplay: 'flex' }));
-   const [{ height }, setBody] = useSpring(() => ({ height: 0, clamp: false, velocity: 20 }));
+   const [{ topY, topDisplay }, setTop] = useSpring(() => ({ topY: 20000, opacityTop: 0, topDisplay: 'flex', config: config.stiff }));
+   const [{ bottomY, bottomDisplay }, setBottom] = useSpring(() => ({ bottomY: 0, opacityBottom: 1, bottomDisplay: 'flex', config: config.stiff }));
+   const [{ height }, setBody] = useSpring(() => ({ height: 0, clamp: false, config: config.stiff }));
 
-   const bindTop = useDrag(({ down, movement: [mx, my], movement }) => {
+   const bindTop = useDrag(({ down, movement: [mx, my] }) => {
       setTop.start({
-         topY: handleSpringToTop(down, my, movement),
+         topY: handleSpringTopToBottom(down, my),
          onChange: () => {
-            setBody.start({ height: -handleSpringToTop(down, my, movement) + 32 });
+            setBody.start({ height: -handleSpringTopToBottom(down, my) + 32 });
          },
          onRest: {
             topY: () => {
@@ -27,14 +27,14 @@ const Card = ({ image, color }) => {
       });
    });
 
-   const bindBottom = useDrag(({ down, movement: [mx, my], movement }) => {
+   const bindBottom = useDrag(({ down, movement: [mx, my] }) => {
       setBottom.start({
-         bottomY: handleSpringToBottom(down, my, movement),
+         bottomY: handleSpringBottomToTop(down, my),
          onProps: () => {
             setTop.start({ topY: -bodyRef.current.offsetHeight + 32, topDisplay: 'none' });
          },
          onChange: () => {
-            setBody.start({ height: -handleSpringToBottom(down, my, movement) + 32 });
+            setBody.start({ height: -handleSpringBottomToTop(down, my) + 32 });
          },
          onRest: {
             bottomY: () => {
@@ -47,35 +47,51 @@ const Card = ({ image, color }) => {
       });
    });
 
-   const handleSpringToTop = (down, my, movement) => {
+   const handleSpringTopToBottom = (down, my) => {
+      console.log('Top To Bot');
       if (down) {
          if (my < bodyRef.current.offsetHeight / 3) {
-            return clamp(-bodyRef.current.offsetHeight + 32 + my, -bodyRef.current.offsetHeight + 32, 0);
+            return -bodyRef.current.offsetHeight + my + 32;
+         } else if (my > bodyRef.current.offsetHeight / 3) {
+            return 0;
+         } else {
+            console.log('run');
+            return -bodyRef.current.offsetHeight + 33;
+         }
+      } else {
+         if (my < bodyRef.current.offsetHeight / 3) {
+            return -bodyRef.current.offsetHeight + 32;
          } else if (my > bodyRef.current.offsetHeight / 3) {
             return 0;
          }
       }
    };
 
-   const handleSpringToBottom = (down, my, movement) => {
+   const handleSpringBottomToTop = (down, my) => {
       if (down) {
-         if (movement[1] < -bodyRef.current.offsetHeight / 3) {
+         if (my > -bodyRef.current.offsetHeight + 32) {
+            if (my < -bodyRef.current.offsetHeight / 3) {
+               return -bodyRef.current.offsetHeight + 32;
+            } else if (my > -bodyRef.current.offsetHeight / 3) {
+               return my;
+            }
+         } else {
+            console.log('run');
+            return -bodyRef.current.offsetHeight + 33;
+         }
+      } else {
+         if (my < -bodyRef.current.offsetHeight / 3) {
             return -bodyRef.current.offsetHeight + 32;
-         } else if (movement[1] > -bodyRef.current.offsetHeight / 3) {
-            return clamp(movement[1], -bodyRef.current.offsetHeight + 32, 0);
          } else {
             return 0;
          }
       }
    };
 
-   const clamp = (value: number, min: number, max: number) => {
-      return Math.min(Math.max(value, min), max);
-   };
    return (
       <div className={'flex flex-col items-center w-full overflow-hidden divide-y-2 divide-gray-100 prevent-touch'}>
-         <div className={'flex flex-row w-full mt-5 space-x-10'}>
-            <div className={'flex flex-col w-full h-auto bg-white border divide-y-2 divide-gray-100'}>
+         <div className={'flex flex-row w-8/12 mt-5 space-x-10'}>
+            <div className={'flex flex-col w-8/12 h-auto bg-white border divide-y-2 divide-gray-100'}>
                <div className={'flex flex-row items-center w-12 h-12 ml-5'}>
                   <img className={'object-cover border border-black rounded-full w-9 h-9'} src={'http://localhost:8000' + image} />
                   <h1 className={'ml-5 font-semibold text-black underline'}>Ho3ein_mola</h1>
@@ -88,7 +104,9 @@ const Card = ({ image, color }) => {
                   <animated.div {...bindBottom()} style={{ y: bottomY, display: bottomDisplay }} className={'absolute bottom-0 z-10 flex items-center justify-center w-full h-8 bg-white border-gray-300 cursor-pointer '}>
                      <div className={'self-center w-20 h-2 mb-1 bg-gray-500 rounded-lg'}></div>
                   </animated.div>
-                  <animated.div style={{ height }} className={'absolute bottom-0 z-0 w-full bg-white'}></animated.div>
+                  <animated.div style={{ height }} className={'absolute bottom-0 z-0 w-full h-auto overflow-auto bg-white'}>
+                     <div className={'w-full h-screen mt-8 text-6xl text-center text-black '}>test</div>
+                  </animated.div>
                </div>
                <div className={'flex flex-row divide-x-2 w-ful'}>
                   <div className={'flex items-center justify-center w-1/3 h-12 cursor-pointer '}>
