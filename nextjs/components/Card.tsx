@@ -89,14 +89,10 @@ const Card = ({ image, color }) => {
    };
 
    return (
-      <div className={'flex flex-col items-center w-full overflow-hidden divide-y-2 divide-gray-100 prevent-touch'}>
-         <div className={'flex flex-row w-8/12 mt-5 space-x-10'}>
-            <div className={'flex flex-col w-8/12 h-auto bg-white border divide-y-2 divide-gray-100'}>
-               <div className={'flex flex-row items-center w-12 h-12 ml-5'}>
-                  <img className={'object-cover border border-black rounded-full w-9 h-9'} src={'http://localhost:8000' + image} />
-                  <h1 className={'ml-5 font-semibold text-black underline'}>Ho3ein_mola</h1>
-               </div>
-               <div className={'relative flex flex-col items-center w-full overflow-hidden min-h-96'} ref={bodyRef}>
+      <div className={'flex flex-col items-center w-6/12 overflow-hidden prevent-touch'}>
+         <div className={'flex flex-row justify-center w-full space-x-10'}>
+            <div className={'flex flex-col w-10/12 h-auto bg-white border '}>
+               <div className={'relative flex flex-col items-center w-full overflow-hidden min-h-96 border-b-1'} ref={bodyRef}>
                   <animated.div {...bindTop()} style={{ y: topY, display: topDisplay }} className={'absolute bottom-0 z-10 flex items-center justify-center w-full h-8 bg-white border-gray-300 cursor-pointer'}>
                      <div className={'self-center w-20 h-2 mb-1 bg-gray-500 rounded-lg'}></div>
                   </animated.div>
@@ -108,7 +104,11 @@ const Card = ({ image, color }) => {
                      <div className={'w-full h-screen mt-8 text-6xl text-center text-black '}>test</div>
                   </animated.div>
                </div>
-               <div className={'flex flex-row divide-x-2 w-ful'}>
+               <div className={'z-20 flex flex-row items-center w-12 h-12 ml-5'}>
+                  <img className={'object-cover rounded-full w-9 h-9'} src={'http://localhost:8000' + image} />
+                  <h1 className={'ml-5 font-semibold text-black underline'}>Ho3ein_mola</h1>
+               </div>
+               <div className={'flex flex-row divide-x-2 w-ful border-t-1'}>
                   <div className={'flex items-center justify-center w-1/3 h-12 cursor-pointer '}>
                      <FiHeart size={24} className={'fill-current text-red'} />
                      <span className={'ml-5 text-base'}>2k</span>

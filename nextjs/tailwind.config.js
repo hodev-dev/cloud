@@ -2,8 +2,8 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
   purge: [
-      './components/**/*.{js,ts,jsx,tsx}',
-      './pages/**/*.{js,ts,jsx,tsx}'
+    './components/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}'
   ],
   // presets: [],
   darkMode: false, // or 'media' or 'class'
@@ -174,6 +174,7 @@ module.exports = {
     borderWidth: {
       DEFAULT: '1px',
       0: '0px',
+      1: '1px',
       2: '2px',
       4: '4px',
       8: '8px',
@@ -1023,5 +1024,8 @@ module.exports = {
     width: ['responsive'],
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
-  }
+  },
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ]
 }
