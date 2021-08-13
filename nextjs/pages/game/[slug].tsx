@@ -85,7 +85,7 @@ const GamePage = ({ slug }) => {
             </div>
          </div>
          <div className={'flex flex-row justify-center w-full h-full mt-4'}>
-            <Card image={gameData.background_image} color={gameData.color} />
+            <Card threshold={5} image={gameData.background_image} color={gameData.color} />
             <div className={'flex flex-col items-center w-4/12 h-full bg-white border'}>
                {gameStatus === GameDataStatus.IDLE && (
                   <Link href={'/game/' + gameData.slug} key={gameData.name}>

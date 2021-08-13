@@ -9,6 +9,15 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      keyframes: {
+        shaker: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' },
+        },
+      },
+      animation: {
+        shaker: 'shaker 5s ease-in-out infinite',
+      },
       fontFamily: {
         'shabnam': [
           "Shabnam"
