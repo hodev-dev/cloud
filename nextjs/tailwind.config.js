@@ -9,6 +9,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        "warmGray-cover": "#0f0d0c",
+      },
       keyframes: {
         shaker: {
           '0%, 100%': { transform: 'translateY(0)' },
@@ -95,6 +98,7 @@ module.exports = {
       72: '18rem',
       80: '20rem',
       96: '24rem',
+      100: '28rem',
     },
     animation: {
       none: 'none',
@@ -982,7 +986,7 @@ module.exports = {
     maxWidth: ['responsive'],
     minHeight: ['responsive'],
     minWidth: ['responsive'],
-    mixBlendMode: ['responsive'],
+    mixBlendMode: ['responsive', 'hover'],
     objectFit: ['responsive'],
     objectPosition: ['responsive'],
     opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
@@ -1036,5 +1040,6 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
+    require('tailwind-scrollbar'),
   ]
 }

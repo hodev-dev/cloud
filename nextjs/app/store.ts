@@ -1,5 +1,4 @@
 import authReducer from '@redux/auth/authSlice';
-import httpReducer from '@redux/http/httpSlice';
 import tabReducer from '@redux/tabs/tabSlice';
 import { Action, combineReducers, configureStore, getDefaultMiddleware, ThunkAction } from '@reduxjs/toolkit';
 import { createTransform, persistReducer } from 'redux-persist';
@@ -13,13 +12,12 @@ export const JSOGTransform = createTransform(
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ["auth", 'http'], // only navigation will be persisted
+  whitelist: ["auth"], // only navigation will be persisted
   transforms: [JSOGTransform]
 };
 
 const reducers = combineReducers({
   auth: authReducer,
-  http: httpReducer,
   tabs: tabReducer
 });
 

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const NamedDivider = (props: any) => {
-  return (
-    <div className={"flex flex-row items-center leading-none text-gray-500 bg-white border border-t-0 border-r-0 font-shabnam text-md h-14"} dir={(props.dir) ? props.dir : "rtl"}>
-      < h1 className={`ml-4 mr-4 ${(props.size) ? props.size : "text-md"} `} > {props.name}</h1 >
-    </div >
-  )
-}
+   return (
+      <div className={'flex flex-row items-center h-auto leading-none text-gray-300 bg-red-500 font-shabnam '} dir={props.dir ? props.dir : 'rtl'}>
+         <h1 className={`mr-10 ${props.size ? props.size : 'text-2xl'} `}> {props.name}</h1>
+      </div>
+   );
+};
 
-export default NamedDivider
+export default NamedDivider;

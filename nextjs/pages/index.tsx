@@ -1,116 +1,102 @@
+import Catalog from '@components/Catalog';
+import Header from '@components/Header';
 import TabNav from '@components/TabNav';
 import makeAxios from '@helper/makeAxios';
 import { findIdByName, select, tabs, tabsSelector } from '@redux/tabs/tabSlice';
-import { AxiosError, AxiosResponse } from 'axios';
-import Img from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { FaDownload } from 'react-icons/fa';
+import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { RotateSpinner } from 'react-spinners-kit';
+import { ImpulseSpinner } from 'react-spinners-kit';
 
-enum GameStatus {
-   LOADING,
-   IDLE,
-   FAILED,
-}
+const HomePage = ({ initialGames, last }) => {
+   const queryClient = useQueryClient();
+   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-const HomePage = () => {
-   const [games, setGames] = useState<any>([]);
-   const [gameStatus, setGameStatus] = useState(GameStatus.LOADING);
-   const [currentPage, setCurrentPage] = useState(1);
-   const [lastPage, setLastPage] = useState(0);
+   const requestMoreGames = async ({ pageParam = 1 }) => {
+      if (pageParam !== 1) {
+         const Axios = makeAxios();
+         const response = await Axios.get('/api/games/?page=' + pageParam);
+         return response.data;
+      } else {
+         return initialGames;
+      }
+   };
+
+   const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery('projects', requestMoreGames, {
+      initialData: { pages: [initialGames], pageParams: [undefined] },
+      staleTime: 1000000000,
+      getNextPageParam: (lastPage, pages) => {
+         if (lastPage.current_page <= lastPage.last_page - 1) {
+            return lastPage.current_page + 1;
+         }
+         return false;
+      },
+   });
+
    const dispatch = useDispatch();
    const _tabsState = useSelector(tabsSelector);
-   const Axios = makeAxios();
 
    useEffect(() => {
       const tab = findIdByName(tabs, 'Home');
       dispatch(select(tab.id));
-   }, [dispatch]);
+   }, [dispatch, data]);
 
-   useEffect(() => {
-      const request = Axios.get('/api/games/?page=' + currentPage);
-      request
-         .then((response: AxiosResponse) => {
-            console.log(response.data);
-            const newArray = [...games, ...response.data.data];
-            setGames(newArray);
-            setLastPage(response.data.last_page);
-            setGameStatus(GameStatus.IDLE);
-         })
-         .catch((error: AxiosError) => {
-            console.log(error.message);
-         });
-   }, [currentPage]);
-
-   const handleMore = () => {
-      if (currentPage + 1 <= lastPage) {
-         setCurrentPage(currentPage + 1);
-      }
-   };
-
-   const renderStatus = () => {
-      if (lastPage === currentPage) {
+   const renderGameStatus = () => {
+      if (hasNextPage === false) {
          return (
-            <div onClick={handleMore} className={'flex flex-row items-center justify-center w-full h-16 cursor-pointer hover:bg-gray-200'}>
+            <div className={'flex flex-row items-center justify-center w-full h-16 cursor-pointer hover:bg-gray-200'}>
                <p className={'text-lg font-shabnam'}>😒 مطالب بیشتری وجود ندارد</p>
             </div>
          );
+      }
+
+      if (status === 'loading') {
+         return (
+            <div className={'flex flex-row items-center justify-center w-full h-16 cursor-pointer hover:bg-gray-200'}>
+               <ImpulseSpinner size={68} frontColor="#881337" loading={true} />
+            </div>
+         );
       } else {
          return (
-            <div onClick={handleMore} className={'flex flex-row items-center justify-center w-full h-16 cursor-pointer hover:bg-gray-200'}>
-               <p className={'text-lg font-shabnam'}>بیشتر</p>
+            <div onClick={() => fetchNextPage()} className={'flex flex-row items-center justify-center w-full h-16 cursor-pointer hover:bg-warmGray-cover'}>
+               <FaDownload className={'text-gray-300 fill-current'} />
+               <p className={'ml-5 text-lg text-gray-200 font-shabnam'}>بیشتر</p>
             </div>
          );
       }
    };
 
-   const renderGames = () => {
-      if (gameStatus === GameStatus.LOADING) {
+   const renderCatalogs = () => {
+      return data.pages.map((page, index) => {
          return (
-            <div className={'flex flex-col items-center justify-center w-full h-screen'}>
-               <RotateSpinner size={150} color="#881337" loading={true} />;<h1 className={'mt-8 text-2xl'}>Loading</h1>
-            </div>
+            <Fragment key={page.data.url * index}>
+               <div className={'grid h-auto grid-cols-6 gap-4 mt-4'}>
+                  <Catalog games={page.data} />
+               </div>
+            </Fragment>
          );
-      } else if (gameStatus == GameStatus.IDLE) {
-         return games.map((game: any) => {
-            return (
-               <Link href={'/game/' + game.slug} key={game.name}>
-                  <div className={'flex flex-wrap w-1/6 h-auto rounded-2xl'} dir={'rtl'}>
-                     <div key={'img1'} className={'relative flex flex-col w-full h-auto bg-white shadow-sm cursor-pointer'} dir={'rtl'}>
-                        <div className={'flex w-full h-auto '} style={{ backgroundColor: game.color }}>
-                           <div className={'object-cover w-full h-96'}>
-                              <Img loading={'lazy'} alt={'img1'} objectFit="cover" layout={'fill'} src={'http://localhost:8000' + game.background_image} />
-                           </div>
-                        </div>
-                        <div
-                           style={{
-                              backgroundImage: `linear-gradient(to top, ${game.color} 16%, transparent 50%`,
-                           }}
-                           className={'absolute top-0 flex items-end justify-center w-full opacity-100 h-96 '}
-                        >
-                           <h1 className={'p-4 font-medium text-center text-white text-md'}>{game.name}</h1>
-                        </div>
-                     </div>
-                  </div>
-               </Link>
-            );
-         });
-      } else {
-         return (
-            <div className={'flex flex-row items-center justify-center w-full h-screen'}>
-               <h1 className={'text-3xl text-gray-500'}>FAILED</h1>
-            </div>
-         );
-      }
+      });
    };
+
    return (
-      <>
+      <div className={'bg-black'}>
+         <Header />
          <TabNav tabsState={_tabsState} />
-         <div className={'relative flex flex-row flex-wrap w-full h-auto bg-white'}>{renderGames()}</div>
-         {renderStatus()}
-      </>
+         <div className={'w-full h-auto '}>{renderCatalogs()}</div>
+         <div className={'border border-warmGray-800'}>{renderGameStatus()}</div>
+      </div>
    );
+};
+
+export const getServerSideProps = async ({}) => {
+   const Axios = makeAxios();
+   const request = await Axios.get('/api/games/?page=1');
+   const { data: initialGames } = request;
+
+   return {
+      props: { initialGames },
+   };
 };
 
 export default HomePage;

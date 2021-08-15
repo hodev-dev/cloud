@@ -8,7 +8,6 @@ class AxiosFactory {
     });
     return this.instance;
   }
-
   CSRF_TOKEN(error: any): Promise<any> {
     console.log({ error })
     const originalRequest = error.config;
@@ -20,11 +19,11 @@ class AxiosFactory {
   }
   setBaseURL() {
     this.instance.interceptors.request.use((config) => {
-      const persist: any = localStorage.getItem('persist:root');
-      const parsed_persist: any = JSON.parse(persist);
-      const http = JSON.parse(parsed_persist.http);
-      const parsed_http = JSON.parse(http);
-      config.baseURL = parsed_http.server;
+      // const persist: any = localStorage.getItem('persist:root');
+      // const parsed_persist: any = JSON.parse(persist);
+      // const http = JSON.parse(parsed_persist.http);
+      // const parsed_http = JSON.parse(http);
+      config.baseURL = 'http://localhost:8000';
       return config;
     }, (error) => {
       return Promise.reject(error);

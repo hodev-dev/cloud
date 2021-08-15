@@ -9,7 +9,7 @@ import NavbarRightControl from './Navbar/NavbarRightControl';
 
 const Header = () => {
    return (
-      <div className={'relative flex flex-col w-full h-auto bg-white md:w-full'} dir={'rtl'}>
+      <div className={'relative flex flex-col w-full h-auto bg-black md:w-full'} dir={'rtl'}>
          <Navbar desktop>
             <NavbarLeftControl>
                <FlatButton icon={FaHome} />
@@ -17,10 +17,7 @@ const Header = () => {
                <FlatButton icon={FiMenu} />
             </NavbarLeftControl>
             <NavbarCenterControl>
-               <input
-                  className={'flex items-center justify-center w-11/12 h-10 text-center text-gray-700 bg-white border border-gray-300 rounded-md '}
-                  placeholder="Search /passwords"
-               />
+               <input className={'flex items-center justify-center w-11/12 h-10 text-center text-gray-800 bg-black border rounded-md border-warmGray-800 '} placeholder="Search /passwords" />
             </NavbarCenterControl>
             <NavbarRightControl desktop>
                <FlatButton icon={FaChartBar} />
